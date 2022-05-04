@@ -28,6 +28,11 @@ export class Bot1 {
     let bestScore = -10000;
     let bestMove;
     const newBoard = [...board];
+    const first = isFirst(newBoard);
+    if (first) {
+      return getRandomInt(0, 9);
+    }
+
     for (let i = 0; i < 9; i++) {
       if (newBoard[i] === 0) {
         newBoard[i] = PIECES.X;
@@ -46,6 +51,13 @@ export class Bot1 {
       bestMove);
     return bestMove;
   }
+}
+
+function isFirst(board) {
+  for (const el of board) {
+    if (el !== 0) return false;
+  }
+  return true
 }
 
 export class Bot2 {
@@ -134,8 +146,13 @@ function minimax(board, depth, isMax) {
 
 function checkWinner(board) {
   let winner = null;
+  const COL = 3;
+  const ROW = 3;
 
-  // Row
+  // Horizontal
+
+
+  // Horizontal
   if (board[0] === board[1] && board[1] === board[2] && board[0] !== 0) {
     if (board[0] === PIECES.X) winner = PIECES.X;
     else winner = PIECES.O;
